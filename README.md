@@ -14,8 +14,6 @@ patch [kubernetes style] API objects.  It's like
 [`make`], in that what it does is declared in a file,
 and it's like [`sed`], in that it emits edited text.
 
-[Source](https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/README.md)
-
 ## kubectl integration
 
 Since [kubectl v1.14][kubectl announcement] Kustomize is integrated in the cli. 
@@ -48,8 +46,8 @@ kubectl apply -k <kustomization_directory>
 >     └── ...
 > ```
 
-* `base` - Base configuration for Kustomize
-* `overlays` - Specific environment configuration for Kustomize
+* `base` - Base configuration for your deployment
+* `overlays` - Specific environment configuration
 
 An overlay is just another kustomization, referring to
 the base, and referring to patches to apply to that
@@ -59,13 +57,11 @@ This arrangement makes it easy to manage your
 configuration with `git`.  The base could have files locally or
 from an upstream repository managed by someone else.
 The overlays could be in a repository you own.
-Arranging the repo clones as siblings on disk avoids
-the need for git submodules (though that works fine, if
-you are a submodule fan).
+
 
 ## Demos
 
-During the next section, we'll use the property `KUSTOMIZE_DEMO` pointing to the root of this project.
+During the next section, we'll use the property `$KUSTOMIZE_DEMO` pointing to the root of this project.
 
 ### Resources
 
@@ -135,7 +131,11 @@ kubectl delete -k $KUSTOMIZE_DEMO/02_cross-cutting-fields/overlays/dev
 
 ### Overlays
 
-In this sample, we'll look how to customize the deployment per environment.
+In this sample, we'll look how to customize the deployment per environment:
+* Change the Service port to `8082` instead of `8080`
+* Add `resources` configuration to the `Deployment`
+* Increase the number of `replicas`
+* Update the `html` index file. 
 
 ```sh
 # Show the output
@@ -160,29 +160,14 @@ kubectl delete -k $KUSTOMIZE_DEMO/03_overlay-features/overlays/dev
 
 ## Resources
 
-https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
-https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
-https://github.com/kubernetes-sigs/kustomize/tree/master/examples
-
-
+* [Declarative Management of Kubernetes Objects Using Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/)
+* [The Kustomization File](https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/)
+* [Kustomize samples](https://github.com/kubernetes-sigs/kustomize/tree/master/examples)
+* [Kustomizons nos déploiements K8S avec style 🤩 ! (Kevin Davin)](https://www.youtube.com/watch?v=WdruhhdefWY)
+* [Let's kustomize our manifests with style! by Kevin Davin](https://www.youtube.com/watch?v=KvXcc7lXiXc)
 
 
 [`make`]: https://www.gnu.org/software/make
 [`sed`]: https://www.gnu.org/software/sed
-[DAM]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#declarative-application-management
-[KEP]: https://github.com/kubernetes/enhancements/blob/master/keps/sig-cli/2377-Kustomize/README.md
-[Kubernetes Code of Conduct]: code-of-conduct.md
-[applied]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#apply
-[base]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#base
-[declarative configuration]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#declarative-application-management
 [kubectl announcement]: https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement
-[kubernetes documentation]: https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
 [kubernetes style]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#kubernetes-style-object
-[kustomization]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#kustomization
-[overlay]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#overlay
-[overlays]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#overlay
-[release page]: https://github.com/kubernetes-sigs/kustomize/releases
-[resource]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#resource
-[resources]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#resource
-[sig-cli]: https://github.com/kubernetes/community/blob/master/sig-cli/README.md
-[variants]: https://kubectl.docs.kubernetes.io/references/kustomize/glossary/#variant
