@@ -1,0 +1,7 @@
+resources:
+  - demo.yaml
+
+configMapGenerator:
+  - name: nginx-index-html
+    files:
+      - config/index.html

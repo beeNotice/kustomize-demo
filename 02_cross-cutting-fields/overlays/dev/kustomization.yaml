@@ -1,0 +1,14 @@
+resources:
+  - ../../../01_generator/base
+
+namespace: cross-cutting-fields
+
+namePrefix: common-
+nameSuffix: "-001"
+
+commonLabels:
+  app.kubernetes.io/version: "1.0.0"
+  app.kubernetes.io/managed-by: kustomize
+
+commonAnnotations:
+  oncallPager: 800-555-1212

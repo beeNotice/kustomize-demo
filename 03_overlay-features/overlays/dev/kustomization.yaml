@@ -1,0 +1,22 @@
+resources:
+  - ../../../01_generator/base
+
+namespace: dev
+
+configMapGenerator:
+  - name: nginx-index-html
+    behavior: replace
+    files:
+      - config/index.html
+
+replicas:
+  - name: nginx
+    count: 2
+
+patches:
+  - path: resources-patch.yaml
+  - path: port-patch.yaml
+    target:
+      kind: Service
+      name: nginx
+
