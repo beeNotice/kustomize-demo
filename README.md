@@ -156,9 +156,9 @@ kubectl delete -k $KUSTOMIZE_DEMO/03_overlay-features/overlays/dev
 
 ## Limitations
 
-* Previous configmap is not deleted
+* Previous configmap is not deleted when content is updated.
 * Kustomize do not automatically create the namespace defined in the Kustomization file. You need a namespace declaration in the resources.
-* Be carreful with the namespace usage, it will be applied everywhere. This can be a problem for use cases where you want to deploy something in different namespaces (Prometheus ServiceMonitor is a good sample)
+* Be careful with the namespace usage, it will be applied everywhere. This can be a problem for use cases where you want to deploy something in different namespaces (Prometheus ServiceMonitor is a good sample)
 
 ## Resources
 
