@@ -112,6 +112,8 @@ kubectl delete -k $KUSTOMIZE_DEMO/01_generator/base
 In this sample we are going to define common stuff. 
 We'll also start to use the overlay structure. We are now referencing the `01_generator/base/kustomization.yaml` we used previously as resource.
 
+> 💡 We can also reference a Git resource instead of a local one: `https://github.com/beeNotice/kustomize-demo/01_generator/base`.
+
 ```sh
 # Show the output
 kubectl kustomize $KUSTOMIZE_DEMO/02_cross-cutting-fields/overlays/dev
